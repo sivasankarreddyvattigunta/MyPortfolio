@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1a202c;
+      color: #f7fafc;
+      overflow-x: hidden;
+    }
+
+    .circle-container {
+      position: relative;
+      width: 80vw;
+      height: 80vh;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    .content-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 0px;
+      text-align: center;
+      color: #f7fafc;
+      font-size: 1.8em;
+      width: 80%;
+      position: absolute;
+      top: 1%;
+      z-index: 2;
+    }
+    .content-box:hover {
+      background: linear-gradient(to right,grey,darkblue);
+      font-size: 2em;
+      transition-duration: 2s;
+      width: 90%;
+    }
+
+
+    .heading {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #f7fafc;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    function createRotatingCube() {
+      const container = document.querySelector('.circle-container');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
+
+      // Create cube
+      const geometry = new THREE.BoxGeometry(50, 50, 50);
+      const material = new THREE.MeshBasicMaterial({ color: 0x4A90E2, wireframe: true });
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+
+      camera.position.z = 150;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.y += 0.01;
+        cube.rotation.x += 0.01;
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createRotatingCube();
+    });
+  </script>
+  <div class="circle-container">
+    <div class="content-box">
+      <div class="heading">Professional Objective</div>
+      A well-organized, creative and goal-oriented graduate possessing excellent
+      communication, problem-solving and leadership skills with a flair to explore
+      suitable avenues in Computer Science Engineering while developing advanced
+      projects with efficiency and quality.
+    </div>
+  </div>
+</body>
+<footer class="col-span-2 p-6 my-0 mb-0 text-3xl text-center text-white border border-blue-500 rounded-lg shadow-xl">
+    <a href="index1.html">Home  |  </a>
+    <a href="mailto:sivasankarreddyvattigunta@gmail.com">Contact Me   </a>
+    <a> </a>
+  
+  </footer>
+</html>
