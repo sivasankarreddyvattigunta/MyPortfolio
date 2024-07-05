@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0F1111;
+      color: #EAEDED;
+      overflow-x: hidden;
+    }
+
+    .circle-container {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 20px;
+      background-color: rgba(15, 17, 17, 0.85);
+    }
+
+    .content-box {
+      background-color: rgba(13, 17, 23, 0.8);
+      border-radius: 10px;
+      padding: 20px;
+      color: #EAEDED;
+      font-size: 1.2em;
+      width: 80%;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .content-box:hover {
+      opacity:0.75;
+      background: linear-gradient(to right, #232F3E, #131A22);
+      font-size: 1.4em;
+      transition-property: all;
+      transition-duration: 2s;
+      width: 90%;
+    }
+  
+
+    .role {
+      font-size: 2em;
+      font-weight: bold;
+      color: #00A8E1;
+      margin-bottom: 10px;
+    }
+
+    .company {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .time {
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .points {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+
+    h2 {
+      font-size: 3.45em;
+      color: #00A8E1;
+      margin-top: 30px;
+      text-align: center;
+    }
+ 
+    footer {
+  margin-bottom: 0.5vh;
+  font-size: 1.75vw;
+}
+
+@media (max-width: 950px) {
+  footer {
+    font-size: 3.5vw;
+  }
+}
+
+
+    footer a {
+      margin-right: 3.35vw;
+      margin-bottom: 0.5vh;
+    }
+
+    footer a:last-child {
+      margin-right: 0;
+     
+    }
+
+    footer a:hover {
+      transition-duration: 3s;
+      padding: 10px;
+      color: #04de80; 
+      border: 1px solid #0F1111;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  
+  <script src="./three.min.js"></script>
+  <script>
+    function createRotatingTorus() {
+      const container = document.querySelector('.circle-container');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      container.appendChild(renderer.domElement);
+      const geometry = new THREE.TorusGeometry(50, 15, 16, 100);
+      const material = new THREE.MeshBasicMaterial({ color: 0x4A90E2, wireframe: true, transparent: true,opacity:0.45 });
+      const torus = new THREE.Mesh(geometry, material);
+      scene.add(torus);
+
+      camera.position.z = 150;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        torus.rotation.y += 0.01;
+        torus.rotation.x += 0.01;
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createRotatingTorus();
+    });
+  </script>
+  <div class="circle-container"></div>
+  <div class="content-wrapper">
+    <h2>Experience</h2>
+    <div class="content-box">
+      <div class="role">Blockchain Developer Intern</div>
+      <div class="company">Metacrafters, US (Remote)</div>
+      <div class="time">June 2023 - August 2023</div>
+      <ul class="points">
+        <li>Developed blockchain applications using JavaScript and Solidity.</li>
+        <li>Worked with Ethereum, AVAX, and Polygon networks.</li>
+        <li>Collaborated with a remote team on real-world projects.</li>
+      </ul>
+    </div>
+    <div class="content-box">
+      <div class="role">C++ Developer Intern</div>
+      <div class="company">Codsfot</div>
+      <div class="time">June 2024 (4 weeks)</div>
+      <ul class="points">
+        <li>Implemented C++ algorithms for software solutions.</li>
+        <li>Participated in code reviews and team meetings.</li>
+        <li>Gained experience in software development lifecycle.</li>
+      </ul>
+    </div>
+    
+    <div class="content-box">
+      <div class="role">Blockchain Developer</div>
+      <div class="company">Null Class</div>
+      <div class="time">July 2024 - Present</div>
+      <ul class="points">
+        <li>Contributing to blockchain projects and smart contract development.</li>
+        <li>Learning advanced blockchain technologies and best practices.</li>
+        <li>Working collaboratively within the development team.</li>
+      </ul>
+    </div>
+    <h2>Training</h2>
+    <div class="content-box">
+      <div class="role">CCNA v7 Training</div>
+      <div class="company">Chandigarh University</div>
+      <div class="time">May 2024 - June 2024</div>
+      <ul class="points">
+        <li>Learned network fundamentals and configurations.</li>
+        <li>Gained hands-on experience with Cisco networking equipment.</li>
+        <li>Prepared for the CCNA certification exam.</li>
+      </ul>
+    </div class="mb-0">
+    <footer class="col-span-2 p-6 my-0 mb-0 text-center text-white border border-blue-500 rounded-lg shadow-xl">
+        <a href="index.html">Home</a>
+        <a href="./personal_details.html">Personal Details</a>
+        <a href="./experience.html">Experience</a>
+        <a href="./objective.html">Objective</a>
+        <a href="./projects.html">Projects</a>
+        <a href="./skills.html">Skills</a>
+        <a href="./certifications.html">Certifications</a>
+        <a href="mailto:sivasankarreddyvattigunta@gmail.com">Connect</a>
+      </footer>
+  </div>
+  
+
+</body>
+</html>

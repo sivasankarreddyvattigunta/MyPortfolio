@@ -1,0 +1,245 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0F1111;
+      color: #EAEDED;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .circle-container {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 20px;
+      background-color: rgba(15, 17, 17, 0.85);
+      min-height: 100vh; /* Ensure content takes up at least the full viewport height */
+      box-sizing: border-box;
+    }
+
+    .content-box {
+      background-color: rgba(13, 17, 23, 0.8);
+      border-radius: 10px;
+      padding: 20px;
+      color: #EAEDED;
+      font-size: 1.2em;
+      width: 80%;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      opacity:0.75;
+    }
+
+    .content-box:hover {
+      background: linear-gradient(to right, #232F3E, #131A22);
+      font-size: 1.4em;
+      transition-duration: 2s;
+      width: 90%;
+      opacity:0.6;
+    }
+
+    .role {
+      font-size: 2em;
+      font-weight: bold;
+      color: #00A8E1;
+      margin-bottom: 10px;
+    }
+    .role:hover{
+      
+        transition-duration: 4s;
+    }
+
+    .company {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .time {
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .points {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+
+    h2 {
+      font-size: 3.45em;
+      color: #00A8E1;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .footer-spacer {
+      height: 45px;
+    }
+    footer {
+  margin-bottom: 0;
+  font-size: 1.75vw;
+}
+
+@media (max-width: 950px) {
+  footer {
+    font-size: 3.5vw;
+  }
+}
+
+
+    footer a {
+      margin-right: 3.35vw;
+      margin-bottom: 0;
+    }
+
+    footer a:last-child {
+      margin-right: 0;
+      
+    }
+
+    footer a:hover {
+      transition-duration: 3s;
+      padding: 10px;
+      color: #04de80; 
+      border: 1px solid #0F1111;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <script src="./three.min.js"></script>
+  <script>
+    function createMovingPyramid() {
+      const container = document.querySelector('.circle-container');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      container.appendChild(renderer.domElement);
+
+      const pyramidGeometry = new THREE.ConeGeometry(5, 10, 4);
+      const pyramidMaterial = new THREE.MeshBasicMaterial({ color: 0x00A8E1, wireframe: true });
+      const pyramid = new THREE.Mesh(pyramidGeometry, pyramidMaterial);
+      scene.add(pyramid);
+
+    
+      const ambientLight = new THREE.AmbientLight(0x404040);
+      scene.add(ambientLight);
+
+      camera.position.z = 20;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        pyramid.rotation.y += 0.01;
+        pyramid.rotation.x += 0.01;
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createMovingPyramid();
+    });
+  </script>
+  <div class="circle-container"></div>
+  <div class="content-wrapper">
+    <h2 class="hover:text-green-400">Projects</h2>
+
+    <div class="content-box">
+      <div class="role"><a href="https://github.com/sivasankarreddyvattigunta/Trustock">Trustock - a Decentralized Exchange</a></div>
+      <div class="company">Sep 2023 - Dec 2023</div>
+      <div class="points">
+        Skills: React.js · JavaScript · Solidity · CSS · Stock Market
+      </div>
+      <div class="points">
+        Trustock operates on blockchain technology to enable direct peer-to-peer trading of digital assets and cryptocurrencies. When you trade on Trustock, your funds and cryptos are held in your own personal wallet, not by the exchange itself. This gives you full control and custody over your assets at all times. Trades occur directly between users' wallets through automated protocols.
+      </div>
+    </div>
+
+    <div class="content-box">
+      <div class="role"><a href="https://github.com/sivasankarreddyvattigunta/Minting_Nfts_by_creating_custom_candymachine_UI_in_solana">Solana's Custom Candy Machine for NFTs</a></div>
+      <div class="company">Oct 2023 - Nov 2023</div>
+      <div class="points">
+        Skills: JavaScript · TypeScript · CSS · Solana
+      </div>
+      <div class="points">
+        The project offers a seamless and efficient platform for artists, creators, and collectors to mint, showcase their digital artwork and collectibles.
+      </div>
+    </div>
+
+    <div class="content-box">
+      <div class="role"><a href="https://github.com/sivasankarreddyvattigunta/Hashify">Hashify</a></div>
+      <div class="company">Sep 2023 - Oct 2023</div>
+      <div class="points">
+        Skills: JavaScript · Cryptography · CSS · HTML5
+      </div>
+      <div class="points">
+        A web application that allows users to generate hash values from text input or files. It supports various hashing algorithms such as SHA-256, SHA-1, SHA-3, MD5, SHA-512, and SHA-384. Users can enter text, select a file, choose a hashing algorithm, and generate hash values.
+      </div>
+    </div>
+
+    <div class="content-box">
+      <div class="role"><a href="https://github.com/sivasankarreddyvattigunta/polyZK">PolyZK: Implementing Zero-Knowledge Circuits for Privacy on Polygon</a></div>
+      <div class="company">Jun 2023 - Aug 2023</div>
+      <div class="points">
+        Skills: Solidity · Cryptography · Blockchain · Polygon
+      </div>
+      <div class="points">
+        PolyZK is a pioneering project aimed at implementing zero-knowledge circuits on the Polygon blockchain network to enhance privacy and security for decentralized applications (DApps) and transactions.
+      </div>
+    </div>
+
+    <div class="content-box">
+      <div class="role"><a href="https://github.com/sivasankarreddyvattigunta/HotelManagementSystem">Hotel Management System</a></div>
+      <div class="company">May 2024</div>
+      <div class="points">
+        Skills: C++ · Problem Solving
+      </div>
+      <div class="points">
+        Developed a Hotel Management System in C++ to manage room bookings, customer records, and room allocations. Implemented features for booking, editing, displaying, and deleting customer records in a hotel environment.
+      </div>
+    </div>
+
+    <div class="content-box">
+      <div class="role"><a href="https://github.com/sivasankarreddyvattigunta/NetRunRateCalculator">Net Run Rate Calculator</a></div>
+      <div class="company">Feb 2024</div>
+      <div class="points">
+        Skills: C++ · OOPS
+      </div>
+      <div class="points">
+        Developed a website for a cricket net run rate calculator. Implemented features to calculate and display net run rates for teams and matches.
+      </div>
+    </div>
+
+    <footer class="col-span-2 p-6  text-center text-white border border-blue-500 rounded-lg shadow-xl">
+        <a href="index.html">Home</a>
+        <a href="./personal_details.html">Personal Details</a>
+        <a href="./experience.html">Experience</a>
+        <a href="./objective.html">Objective</a>
+        <a href="./projects.html">Projects</a>
+        <a href="./skills.html">Skills</a>
+        <a href="./certifications.html">Certifications</a>
+        <a href="mailto:sivasankarreddyvattigunta@gmail.com">Connect</a>
+      </footer>
+  </div>
+
+</body>
+</html>

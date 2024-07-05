@@ -1,0 +1,354 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0F1111;
+      color: #EAEDED;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .circle-container {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+    }
+
+    .moon {
+      width: 100px;
+      height: 100px;
+      background-color: #EAEDED;
+      border-radius: 50%;
+      position: relative;
+      top: 10vh; 
+      left: 70vw; 
+      transform: rotate(-45deg);
+    }
+
+    .phase {
+      width: 100%;
+      height: 100%;
+      background-color: #0F1111;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: center right;
+    }
+
+    .new-moon .phase {
+      transform: scaleX(1);
+    }
+
+    .waxing-crescent .phase {
+      transform: scaleX(0.75);
+    }
+
+    .first-quarter .phase {
+      transform: scaleX(0.5);
+    }
+
+    .waxing-gibbous .phase {
+      transform: scaleX(0.25);
+    }
+
+    .full-moon .phase {
+      transform: scaleX(0);
+    }
+
+    .waning-gibbous .phase {
+      transform: scaleX(0.25);
+      background-color: #EAEDED;
+    }
+
+    .last-quarter .phase {
+      transform: scaleX(0.5);
+      background-color: #EAEDED;
+    }
+
+    .waning-crescent .phase {
+      transform: scaleX(0.75);
+      background-color: #EAEDED;
+    }
+
+    .star {
+      position: absolute;
+      background-color: #EAEDED;
+      border-radius: 50%;
+      width: 2px;
+      height: 2px;
+    }
+
+    .content-wrapper {
+      position: relative;
+      width: 100%;
+      padding: 20px;
+      background-color: rgba(15, 17, 17, 0.85);
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .content-box {
+      background-color: rgba(13, 17, 23, 0.8);
+      border-radius: 10px;
+      padding: 20px;
+      color: #EAEDED;
+      font-size: 1.2em;
+      width: 80%;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .content-box:hover {
+      background: linear-gradient(to right, #232F3E, #131A22);
+      font-size: 1.4em;
+      transition-duration: 2s;
+      width: 90%;
+    }
+
+    .role {
+      font-size: 2em;
+      font-weight: bold;
+      color: #00A8E1;
+      margin-bottom: 10px;
+    }
+
+    .company {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .time {
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .points {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+    h2 {
+      font-size: 7.5vw;
+      color: #00A8E1;
+      margin-top: 30px;
+      text-align: center;
+    }
+    @media (min-width:750px) or (min-height:750px) {
+    h2{
+        font-size: 4.5vw;
+    }
+    
+}
+
+footer {
+  bottom: 0;
+  position: absolute;
+  margin-left: 0px;
+  font-size: 1.75vw;
+  z-index: 1;
+  width: 98%;
+  margin-bottom: 0;
+}
+
+@media (max-width: 950px) {
+  footer {
+    font-size: 4vw;
+  }
+}
+
+    footer a {
+      margin-right: 3.35vw;
+      margin-left: 0px;
+    }
+
+    footer a:last-child {
+      margin-right: 0;
+    }
+
+    footer a:hover {
+      transition-duration: 3s;
+      padding: 10px;
+      color: #04de80; 
+      border: 1px solid #0F1111;
+      border-radius: 4px;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background-color: #131A22;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .modal-content label {
+      color: #EAEDED;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    .modal-content input[type="date"] {
+      background-color: #EAEDED;
+      color: #0F1111;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .modal-content button {
+      background-color: #00A8E1;
+      color: #EAEDED;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .modal-content button:hover {
+      background-color: #04de80;
+    }
+  </style>
+</head>
+<body>
+  <div class="modal" id="dateModal">
+    <div class="modal-content">
+      <label for="dateInput">Please enter a date:</label>
+      <input type="date" id="dateInput">
+      <button onclick="submitDate()">Submit</button>
+    </div>
+  </div>
+  <div class="content-wrapper" id="contentWrapper" style="display: none;">
+    <h2>Skills</h2>
+    <div class="content-box">
+      <ul class="points">
+        <li>JavaScript</li>
+        <li>Rust</li>
+        <li>Networking</li>
+        <li>React.js</li>
+        <li>Solidity</li>
+        <li>DBMS</li>
+        <li>HTML & CSS</li>
+        <li>Blockchain Technology</li>
+        <li>C++</li>
+      </ul>
+    </div>
+    <footer class="col-span-2 p-6 text-center text-white border border-blue-500 rounded-lg shadow-xl">
+      <a href="index.html">Home</a>
+      <a href="./personal_details.html">Personal Details</a>
+      <a href="./experience.html">Experience</a>
+      <a href="./objective.html">Objective</a>
+      <a href="./projects.html">Projects</a>
+      <a href="./skills.html">Skills</a>
+      <a href="./certifications.html">Certifications</a>
+      <a href="mailto:sivasankarreddyvattigunta@gmail.com">Connect</a>
+    </footer>
+  </div>
+  <div class="circle-container" id="circleContainer" style="display: none;">
+    <div class="moon">
+      <div class="phase"></div>
+    </div>
+  </div>
+  <script>
+    function calculateMoonPhase(year, month, day) {
+      let c, e, jd, b;
+      c = e = jd = b = 0;
+
+      if (month < 3) {
+        year--;
+        month += 12;
+      }
+
+      month++;
+
+      c = 365.25 * year;
+      e = 30.6 * month;
+      jd = c + e + day - 694039.09; 
+      jd /= 29.5305882; 
+      b = parseInt(jd); 
+      jd -= b; 
+      b = Math.round(jd * 8); 
+
+      if (b >= 8) b = 0; 
+
+      return b;
+    }
+
+    function displayMoonPhase(year, month, day) {
+      const moon = document.querySelector('.moon');
+      const phaseClasses = [
+        'new-moon',
+        'waxing-crescent',
+        'first-quarter',
+        'waxing-gibbous',
+        'full-moon',
+        'waning-gibbous',
+        'last-quarter',
+        'waning-crescent'
+      ];
+
+      const phaseIndex = calculateMoonPhase(year, month, day);
+
+      const phase = phaseClasses[phaseIndex];
+      moon.classList.add(phase);
+    }
+
+    function createStars(numStars) {
+      const container = document.querySelector('.circle-container');
+
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.left = Math.random() * 100 + 'vw';
+        container.appendChild(star);
+      }
+    }
+
+    function submitDate() {
+      const dateInput = document.getElementById('dateInput').value;
+      if (dateInput) {
+        const [year, month, day] = dateInput.split('-').map(Number);
+        if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+          const contentWrapper = document.getElementById('contentWrapper');
+          const circleContainer = document.getElementById('circleContainer');
+          contentWrapper.style.display = 'block';
+          circleContainer.style.display = 'block';
+          displayMoonPhase(year, month, day);
+          createStars(100);
+          document.getElementById('dateModal').style.display = 'none';
+        } else {
+          alert('Invalid date format. Please use YYYY-MM-DD.');
+        }
+      } else {
+        alert('Please enter a valid date.');
+      }
+    }
+  </script>
+</body>
+</html>

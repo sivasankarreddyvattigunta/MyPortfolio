@@ -1,0 +1,303 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    :root {
+  --width-ratio: calc(100vw / 100vh )*100;
+  --height-ratio: calc(100vh / 100vw )*100;
+}
+    body {
+      background-color: #0F1111;
+      color: #f7fafc;
+      overflow-x: hidden;
+    }
+
+    .circle-container {
+      position: relative;
+      width: 80vw;
+      height: 80vh;
+      margin: 0 auto;
+      perspective: 1000px; 
+     
+      z-index: 1;
+     
+     
+    }
+
+    .topic {
+      position: absolute;
+      width: 7.8vw;
+      height: auto;
+      display: flex;
+  
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: color 0.5s;
+      color: #718096;
+      cursor: pointer;
+      border-radius: 0.5%;
+      padding: 10%;
+      font-size: calc(5 * min(1vh, 1vw));
+    }
+
+    .highlighted {
+    color: #c8d2d5;
+    }
+
+    .topic1 { top: 5%; left: 50%; transform: translate(-50%, -50%); }
+    .topic2 { top: 25%; left: 85%; transform: translate(-50%, -50%); }
+    .topic3 { top: 75%; left: 85%; transform: translate(-50%, -50%); }
+    .topic4 { top: 95%; left: 50%; transform: translate(-50%, -50%); }
+    .topic5 { top: 75%; left: 15%; transform: translate(-50%, -50%); }
+    .topic6 { top: 25%; left: 15%; transform: translate(-50%, -50%); }
+
+    .background-circle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background-color: #4885c1;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: roam 20s infinite alternate;
+    }
+
+    .background-circle:nth-child(1) {
+      top: 0;
+      left: 0;
+      animation-name: roam1;
+    }
+
+    .background-circle:nth-child(2) {
+      top: 0;
+      left: 50%;
+      animation-name: roam2;
+    }
+
+    .background-circle:nth-child(3) {
+      top: 0;
+      left: 100%;
+      animation-name: roam3;
+    }
+
+    .background-circle:nth-child(4) {
+      top: 50%;
+      left: 0;
+      animation-name: roam4;
+    }
+
+    .background-circle:nth-child(5) {
+      top: 50%;
+      left: 100%;
+      animation-name: roam5;
+    }
+
+    .background-circle:nth-child(6) {
+      top: 100%;
+      left: 0;
+      animation-name: roam6;
+    }
+
+    .background-circle:nth-child(7) {
+      top: 100%;
+      left: 50%;
+      animation-name: roam7;
+    }
+
+    .background-circle:nth-child(8) {
+      top: 100%;
+      left: 100%;
+      animation-name: roam8;
+    }
+
+    .background-circle:nth-child(9) {
+      top: 25%;
+      left: 25%;
+      animation-name: roam9;
+    }
+
+    .background-circle:nth-child(10) {
+      top: 75%;
+      left: 75%;
+      animation-name: roam10;
+    }
+
+    @keyframes roam1 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(100vw, 100vh); }
+    }
+
+    @keyframes roam2 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50vw, 100vh); }
+    }
+
+    @keyframes roam3 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100vw, 100vh); }
+    }
+
+    @keyframes roam4 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(100vw, -50vh); }
+    }
+
+    @keyframes roam5 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100vw, -50vh); }
+    }
+
+    @keyframes roam6 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(100vw, -100vh); }
+    }
+
+    @keyframes roam7 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50vw, -100vh); }
+    }
+
+    @keyframes roam8 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100vw, -100vh); }
+    }
+
+    @keyframes roam9 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50vw, 50vh); }
+    }
+
+    @keyframes roam10 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50vw, -50vh); }
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .globe-container {
+      width: var(min(--height-ratio,--width-ratio));
+      height: var(min(--height-ratio,--width-ratio));
+    }
+  </style>
+</head>
+<body class="flex-col items-center justify-center min-h-screen textflex">
+    <h1 class="py-10 text-5xl text-center text-gray-200" style="color: #00A8E1;"> Welcome to My Portfolio </h1>
+  <script src="./three.min.js"></script>
+  <script>
+    let highlightInterval;
+    
+    function createGlobe() {
+      const container = document.querySelector('.circle-container');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
+
+      const geometry = new THREE.SphereGeometry(50, 32, 32);
+      const material = new THREE.MeshBasicMaterial({ color: 0x4A90E2, wireframe: true });
+      const globe = new THREE.Mesh(geometry, material);
+      scene.add(globe);
+
+      camera.position.z = 150;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        globe.rotation.y += 0.0075;
+        globe.rotation.x += 0.0075;
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+
+    function updateClock(birthdate) {
+      const now = new Date();
+      const birth = new Date(birthdate);
+      const diff = now - birth;
+
+      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+      const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('timeSinceBirth').innerText = `Age: ${years} years ${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+    }
+
+    const birthdate = '2004-01-01';
+    setInterval(() => {
+      updateClock(birthdate);
+    }, 1000);
+
+    function highlightTopics() {
+      const topics = document.querySelectorAll('.topic');
+      let index = 0;
+      highlightInterval = setInterval(() => {
+        topics.forEach((topic, i) => {
+          topic.classList.toggle('highlighted', i === index);
+        });
+        index = (index + 1) % topics.length;
+      }, 3000);
+    }
+
+    function redirectToPage(event) {
+      const topicText = event.target.innerText;
+      const pageMap = {
+        'Details': 'personal_details.html',
+        'Experience': 'experience.html',
+        'Projects': 'projects.html',
+        'Certifications': 'certifications.html',
+        'Objective': 'objective.html',
+        'Skills': 'skills.html'
+      };
+      const targetPage = pageMap[topicText];
+      if (targetPage) {
+        window.location.href = targetPage;
+      }
+    }
+
+    function stopHighlighting() {
+      clearInterval(highlightInterval);
+    }
+
+    function resumeHighlighting() {
+      highlightTopics();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      highlightTopics();
+      createGlobe();
+      const topics = document.querySelectorAll('.topic');
+      topics.forEach(topic => {
+        topic.addEventListener('click', redirectToPage);
+        topic.addEventListener('mouseover', stopHighlighting);
+        topic.addEventListener('mouseout', resumeHighlighting);
+      });
+    });
+  </script>
+  <div class="circle-container">
+    <div class="duration-1000 topic topic1 transform-all hover:text-green-400">Details</div>
+    <div class="duration-1000 topic topic2 transform-all hover:text-green-400">Experience</div>
+    <div class="duration-1000 topic topic3 transform-all hover:text-green-400">Projects</div>
+    <div class="duration-1000 topic topic4 transform-all hover:text-green-400">Certifications</div>
+    <div class="duration-1000 topic topic5 transform-all hover:text-green-400">Objective</div>
+    <div class="duration-1000 topic topic6 transform-all hover:text-green-400">Skills</div>
+  </div>
+  
+  <div class="background-circle"></div>
+  <div class="background-circle"></div>
+  <div class="background-circle"></div>
+  <div class="background-circle"></div>
+  <div class="background-circle"></div>
+  <div class="background-circle"></div>
+  <div class="background-circle"></div>
+  <div class="background-circle"></div>
+  <div class="background-circle"></div>
+  <div class="background-circle"></div>
+</body>
+</html>

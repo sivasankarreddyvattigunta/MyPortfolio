@@ -1,0 +1,440 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Details</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color:  #0F1111;;
+      color: #f7fafc;
+      overflow-x: hidden;
+ 
+    }
+  
+    li{
+      font-size: 1.75vw;
+    }
+   
+    
+    :root {
+  --width-ratio: calc(100vw / 100vh * 100);
+  --height-ratio: calc(100vh / 100vw * 100);
+}
+    .circle-container {
+      position: relative;
+      width: 80vw;
+      height: 80vh;
+      font-size: 5vw;
+      margin: 0 auto;
+      perspective: 1000px;
+      z-index: 1;
+    }
+   
+
+.center-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+ height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+@media (max-width:500px) {
+    .center-image{
+        width: 200px;
+ height: 200px;
+    }
+}
+
+
+.center-image img {
+  width: 100%;
+  height: 100%; 
+  object-fit: cover; 
+  border-radius: 50%; 
+}
+
+    .topic {
+        position: absolute;
+      width: min(calc(8*--height-ratio),calc(8*--width-ratio));
+      height: min(calc(8*--height-ratio),calc(8*--width-ratio));
+      display: flex;  
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: color 0.5s;
+      color: #718096;
+      cursor: pointer;
+      border-radius: 0.5%;
+      padding: 10%;
+      font-size: 4.45vw;
+    }
+    @media (min-width: 900px) {
+      .topic{
+        font-size: 2.45vw;
+      }
+      
+    }
+
+    .highlighted {
+      color:#00A8E1;
+    }
+    p{
+      font-size: 1.75vw;
+    }
+   
+
+    .topic1 { top: 5%; left: 50%; transform: translate(-50%, -50%); }
+    .topic2 { top: 25%; left: 85%; transform: translate(-50%, -50%); }
+    .topic3 { top: 75%; left: 85%; transform: translate(-50%, -50%); }
+    .topic4 { top: 95%; left: 50%; transform: translate(-50%, -50%); }
+    .topic5 { top: 75%; left: 15%; transform: translate(-50%, -50%); }
+    .topic6 { top: 25%; left: 15%; transform: translate(-50%, -50%); }
+
+    .background-circle {
+      position: absolute;
+      width: 1vw;
+      height: 1vw;
+      background-color: #4885c1;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: roam 20s infinite alternate;
+    }
+    
+
+    .background-circle:nth-child(1) {
+      top: 0;
+      left: 0;
+      animation-name: roam1;
+    }
+
+    .background-circle:nth-child(2) {
+      top: 0;
+      left: 50%;
+      animation-name: roam2;
+    }
+
+    .background-circle:nth-child(3) {
+      top: 0;
+      left: 100%;
+      animation-name: roam3;
+    }
+
+    .background-circle:nth-child(4) {
+      top: 50%;
+      left: 0;
+      animation-name: roam4;
+    }
+
+    .background-circle:nth-child(5) {
+      top: 50%;
+      left: 100%;
+      animation-name: roam5;
+    }
+
+    .background-circle:nth-child(6) {
+      top: 100%;
+      left: 0;
+      animation-name: roam6;
+    }
+
+    .background-circle:nth-child(7) {
+      top: 100%;
+      left: 50%;
+      animation-name: roam7;
+    }
+
+    .background-circle:nth-child(8) {
+      top: 100%;
+      left: 100%;
+      animation-name: roam8;
+    }
+
+    .background-circle:nth-child(9) {
+      top: 25%;
+      left: 25%;
+      animation-name: roam9;
+    }
+
+    .background-circle:nth-child(10) {
+      top: 75%;
+      left: 75%;
+      animation-name: roam10;
+    }
+
+    @keyframes roam1 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(100vw, 100vh); }
+    }
+
+    @keyframes roam2 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50vw, 100vh); }
+    }
+
+    @keyframes roam3 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100vw, 100vh); }
+    }
+
+    @keyframes roam4 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(100vw, -50vh); }
+    }
+
+    @keyframes roam5 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100vw, -50vh); }
+    }
+
+    @keyframes roam6 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(100vw, -100vh); }
+    }
+
+    @keyframes roam7 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50vw, -100vh); }
+    }
+
+    @keyframes roam8 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100vw, -100vh); }
+    }
+
+    @keyframes roam9 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50vw, 50vh); }
+    }
+
+    @keyframes roam10 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50vw, -50vh); }
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .hidden-content {
+      display: none;
+    }
+
+    .visible-content {
+      display: block;
+    }
+    footer {
+  margin-bottom: 0.5vh;
+  font-size: 1.75vw;
+  margin-left: 0;
+}
+
+@media (max-width: 950px) {
+  footer {
+    font-size: 3.5vw;
+  }
+}
+@media(max-height:500px){
+    .center-image{
+        height: 200px;
+        width: 200px;
+    }
+}
+@media (max-width: 750px) {
+     .topic{
+      font-size: 6vw;
+     }
+      p{
+        font-size: 4.45vw;
+    }
+    li{
+      font-size: 4.5vw;;
+    }
+    }
+
+
+    footer a {
+      margin-right: 3.35vw;
+      margin-bottom: 0.5vh;
+    }
+
+    footer a:last-child {
+      margin-right: 0;
+    
+    }
+
+    footer a:hover {
+      transition-duration: 3s;
+      padding: 10px;
+      color: #04de80; 
+      border: 1px solid #0F1111;
+      border-radius: 4px;
+    }
+
+  </style>
+</head>
+<body class="flex-col items-center justify-center min-h-screen textflex">
+    <h1 class="py-10 text-center text-gray-200">  </h1>
+    <link href="./three.min.js" rel="stylesheet">
+  <script>
+    let highlightInterval;
+    
+    function updateClock(birthdate) {
+      const now = new Date();
+      const birth = new Date(birthdate);
+      const diff = now - birth;
+
+      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+      const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('timeSinceBirth').innerText = ` ${years} years ${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+    }
+
+    const birthdate = '2004-01-01';
+    setInterval(() => {
+      updateClock(birthdate);
+    }, 1000);
+
+    function highlightTopics() {
+      const topics = document.querySelectorAll('.topic');
+      let index = 0;
+      highlightInterval = setInterval(() => {
+        topics.forEach((topic, i) => {
+          topic.classList.toggle('highlighted', i === index);
+        });
+        index = (index + 1) % topics.length;
+      }, 3000);
+    }
+
+    function showContent(event) {
+      const topicText = event.target.innerText.toLowerCase().replace(/ /g, '');
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.add('hidden-content');
+        section.classList.remove('visible-content');
+      });
+      document.getElementById(topicText).classList.add('visible-content');
+      document.getElementById(topicText).classList.remove('hidden-content');
+    }
+
+    function stopHighlighting() {
+      clearInterval(highlightInterval);
+    }
+
+    function resumeHighlighting() {
+      highlightTopics();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      highlightTopics();
+
+      document.querySelectorAll('.topic').forEach(topic => {
+        topic.addEventListener('mouseenter', showContent);
+        topic.addEventListener('mouseleave', resumeHighlighting);
+        topic.addEventListener('mouseenter', stopHighlighting);
+      });
+    });
+  </script>
+  <div class="circle-container">
+    <div class="background-circle"></div>
+    <div class="background-circle"></div>
+    <div class="background-circle"></div>
+    <div class="background-circle"></div>
+    <div class="background-circle"></div>
+    <div class="background-circle"></div>
+    <div class="background-circle"></div>
+    <div class="background-circle"></div>
+    <div class="background-circle"></div>
+    <div class="background-circle"></div>
+
+    <div class="center-image">
+      <img src="./siva_pic.jpg" alt="sivasankarreddyvattigunta">
+    </div >
+
+    <div class="duration-1000 topic topic1 transform-all hover:text-green-400">Personal Details</div>
+    <div class="duration-1000 topic topic2 transform-all hover:text-green-400">Education</div>
+    <div class="duration-1000 topic topic3 transform-all hover:text-green-400">Languages Known</div>
+    <div class="duration-1000 topic topic4 transform-all hover:text-green-400">Profiles</div>
+    <div class="duration-1000 topic topic5 transform-all hover:text-green-400">Achievements</div>
+    <div class="duration-1000 topic topic6 transform-all hover:text-green-400">Activities</div>
+  </div>
+  <div class="container mx-auto mt-10">
+    <div class="grid grid-cols-2 gap-4">
+      <div id="personaldetails" class="col-span-2 p-6 text-white bg-gray-900 border border-blue-500 rounded-lg shadow-xl content-section hidden-content">
+        <h1 class="pb-4 text-3xl font-bold" style="color:#00A8E1">Personal Details</h1>
+        <p><strong>Mother’s Name:</strong> Vattigunta Padmavathi</p>
+        <p><strong>Father’s Name:</strong> Vattigunta Rami Reddy (late)</p>
+        <p><strong>D.O.B.:</strong> 1st January 2004</p>
+        <p id="timeSinceBirth"><strong>Age:</strong></p>
+
+        <p><strong>Address:</strong> <a href="https://maps.app.goo.gl/nmGMa7a8SgPBWB8L9" target="_blank" class="text-blue-400">Guntur, Andhra Pradesh-522005</a></p>
+        <p><strong>Email:</strong> <a href="mailto:sivasankarreddyvattigunta@gmail.com" class="text-blue-400">sivasankarreddyvattigunta@gmail.com</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+918688505716" class="text-blue-400">+91 8688505716</a></p>
+      </div>
+      <div id="education" class="col-span-2 p-6 text-white bg-gray-900 border border-blue-500 rounded-lg shadow-xl content-section hidden-content">
+        <h1 class="pb-4 text-3xl font-bold" style="color:#00A8E1">Education</h1>
+        <p><strong>2021 - 2025:</strong> Bachelors in Computer Science Engineering, Chandigarh University, CGPA: 8.5</p>
+        <p><strong>2019 - 2021:</strong> Intermediate, Future Focus Junior College, Guntur, Percentage: 96%</p>
+        <p><strong>2018 - 2019:</strong> Matriculation, St. Xaviers Public School, Guntur, CGPA: 10</p>
+      </div>
+      <div id="languagesknown" class="col-span-2 p-6 text-white bg-gray-900 border border-blue-500 rounded-lg shadow-xl content-section hidden-content">
+        <h1 class="pb-4 text-3xl font-bold" style="color:#00A8E1">Languages Known</h1>
+       <strong> <ul class="list-disc list-inside">
+          <li>English</li>
+          <li>Hindi</li>
+          <li>Telugu</li>
+        </ul></strong>
+      </div>
+      <div id="profiles" class="col-span-2 p-6 text-white bg-gray-900 border border-blue-500 rounded-lg shadow-xl content-section hidden-content">
+        <h1 class="pb-4 text-3xl font-bold" style="color:#00A8E1">Profiles</h1>
+        <ul >
+          <li>
+            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sivasankarreddyvattigunta/" target="_blank" class="text-blue-400">linkedin.com/sivasankarreddyvattigunta</a></p>
+          </li>
+          <li>
+            <p><strong>Github:</strong> <a href="https://github.com/sivasankarreddyvattigunta" target="_blank" class="text-blue-400">github.com/sivasankarreddyvattigunta</a></p>
+          </li>
+          <li>
+            <p><strong>Coding Ninjas:</strong> <a href="https://www.naukri.com/code360/profile/sivasankarreddy" target="_blank" class="text-blue-400">naukri.com/sivasankarreddy</a></p>
+          </li>
+          <li>
+            <p><strong>Leetcode:</strong> <a href="https://leetcode.com/u/sivasankarreddy03/" target="_blank" class="text-blue-400">leetcode.com/sivasankarreddy03</a></p>
+          </li>
+        </ul>
+      </div>
+      
+      
+      <div id="achievements" class="col-span-2 p-6 text-white bg-gray-900 border border-blue-500 rounded-lg shadow-xl content-section hidden-content">
+        <h1 class="pb-4 text-3xl font-bold" style="color:#00A8E1">Achievements</h1>
+        <p>• School topper in matriculation and Intermediate</p>
+        <p>• 3rd Place in District level chess Championship</p>
+        <p>• 1st place in District level Essay writing competition</p>
+      </div>
+      <div id="activities" class="col-span-2 p-6 text-white bg-gray-900 border border-blue-500 rounded-lg shadow-xl content-section hidden-content">
+        <h1 class="pb-4 text-3xl font-bold" style="color:#00A8E1">Activities</h1>
+        <ul class="list-disc list-inside">
+          <li>Served as SPL , Regulated and organized several events in School</li>
+          <li>Participated in RYLA</li>
+          <li>Captained and Won Cricket tournament conducted in School</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <footer class="col-span-2 p-6  text-center text-white border border-blue-500 rounded-lg shadow-xl">
+    <a href="index.html">Home</a>
+    <a href="./personal_details.html">Personal Details</a>
+    <a href="./experience.html">Experience</a>
+    <a href="./objective.html">Objective</a>
+    <a href="./projects.html">Projects</a>
+    <a href="./skills.html">Skills</a>
+    <a href="./certifications.html">Certifications</a>
+    <a href="mailto:sivasankarreddyvattigunta@gmail.com">Connect</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    html, body {
+      background-color: #0F1111;
+      color: #f7fafc;
+      margin: 0;
+    }
+
+    .circle-container {
+      position: relative;
+      width: 80vw;
+      height: 80vh;
+      opacity: 0.5;
+      margin-top: 5vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    .content-box {
+      background-color: rgba(0, 168, 225, 0.1); 
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      color: #f7fafc;
+      font-size: calc(4*min(1vh,1vw));
+      width: 85vw;
+      position: absolute;
+      top: 1%;
+      z-index: 2;
+      opacity: 0.9;
+    }
+
+    .content-box:hover {
+      background: linear-gradient(to right, #094970, #01171f); 
+     
+      transition-duration: 2s;
+      font-size: calc(4.01*min(1vh,1vw));
+      opacity: 0.7;
+    }
+
+    .heading {
+      font-size: 4.5vh;
+      margin-bottom: 10px;
+      color: #f7fafc;
+    }
+
+    .heading:hover {
+      color: #4ade80;
+    }
+
+    footer {
+  margin-bottom: 0;
+  font-size: 1.75vw;
+}
+
+@media (max-width: 950px) {
+  footer {
+    font-size: 3.5vw;
+  }
+}
+
+
+    footer a {
+      margin-right: 3.35vw;
+      margin-bottom: 0.5vh;
+    }
+
+    footer a:last-child {
+      margin-right: 0;
+    
+    }
+
+    footer a:hover {
+      transition-duration: 3s;
+      padding: 10px;
+      color: #04de80; 
+      border: 1px solid #0F1111;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen">
+  <script src="./three.min.js"></script>
+  <script>
+    function createRotatingCube() {
+      const container = document.querySelector('.circle-container');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
+      const cubeSize = Math.min(container.clientWidth, container.clientHeight) * 0.25;
+      const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+      const material = new THREE.MeshBasicMaterial({ color: 0x00A8E1, wireframe: true });
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+
+      camera.position.z = cubeSize * 3;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.y += 0.01;
+        cube.rotation.x += 0.01;
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createRotatingCube();
+    });
+
+    window.addEventListener('resize', () => {
+      document.querySelector('.circle-container').innerHTML = '';
+      createRotatingCube();
+    });
+  </script>
+
+  <div class="content-box">
+    <div class="heading" style="color: #00A8E1;">Professional Objective</div>
+    A well-organized, creative and goal-oriented graduate possessing excellent
+    communication, problem-solving and leadership skills with a flair to explore
+    suitable avenues in Computer Science Engineering while developing advanced
+    projects with efficiency and quality.
+  </div>
+  <div class="circle-container"></div>
+</body>
+<footer class="col-span-2 p-6 text-center text-white border border-blue-500 rounded-lg shadow-xl">
+  <a href="index.html">Home</a>
+  <a href="./personal_details.html">Personal Details</a>
+  <a href="./experience.html">Experience</a>
+  <a href="./objective.html">Objective</a>
+  <a href="./projects.html">Projects</a>
+  <a href="./skills.html">Skills</a>
+  <a href="./certifications.html">Certifications</a>
+  <a href="mailto:sivasankarreddyvattigunta@gmail.com">Connect</a>
+</footer>
+</html>

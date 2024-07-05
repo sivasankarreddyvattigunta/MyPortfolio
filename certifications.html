@@ -1,0 +1,311 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0F1111;
+      color: #EAEDED;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .circle-container {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .saturn {
+      width: 200px;
+      height: 200px;
+      opacity:0.4;
+      background-color: #EAEDED;
+      border-radius: 50%;
+      position: absolute;
+      top: 15vh;
+      left: 70vw;
+      animation: moveSaturn 10s linear infinite;
+    }
+
+    @keyframes moveSaturn {
+      0% {transform: translateY(0px);}
+      50% {transform: translateY(30px);}
+      100% {transform: translateY(0px);}
+    }
+
+    .ring {
+      width: 300px;
+      height: 100px;
+      border: 10px solid #EAEDED;
+      border-radius: 100px / 50px;
+      position: absolute;
+      top: 50px;
+      left: -50px;
+      transform: rotate(45deg);
+      background-color: transparent;
+    }
+
+    .star {
+      position: absolute;
+      background-color: #EAEDED;
+      border-radius: 50%;
+      width: 2px;
+      height: 2px;
+    
+    }
+
+    .content-wrapper {
+      position: relative;
+      
+      width: 100%;
+      padding: 20px;
+      background-color: rgba(15, 17, 17, 0.85);
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .content-box {
+      background-color: rgba(13, 17, 23, 0.8);
+      border-radius: 10px;
+      padding: 20px;
+      color: #EAEDED;
+      font-size: 1.2em;
+      width: 80%;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .content-box:hover {
+      background: linear-gradient(to right, #232F3E, #131A22);
+      font-size: 1.4em;
+      transition-duration: 2s;
+      width: 90%;
+    }
+
+    .role {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #00A8E1;
+      margin-bottom: 10px;
+    }
+    .role:hover {
+        transition: 4.5s;
+    }
+
+    .company {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .time {
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .points {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+
+    h2 {
+      font-size: 12vw;
+      color: #00A8E1;
+      margin-top: 30px;
+      text-align: center;
+    }
+    @media (min-width:600px) {
+        h2{
+        font-size: 5vw;}
+    }
+
+    footer {
+  margin-bottom: 0;
+  font-size: 1.75vw;
+}
+
+@media (max-width: 950px) {
+  footer {
+    font-size: 3.5vw;
+  }
+}
+
+
+    footer a {
+      margin-right: 3.35vw;
+      margin-bottom: 0.5vh;
+    }
+
+    footer a:last-child {
+      margin-right: 0;
+     
+    }
+
+    footer a:hover {
+      transition-duration: 3s;
+      padding: 10px;
+      color: #04de80; 
+      border: 1px solid #0F1111;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function createStars(numStars) {
+      const container = document.querySelector('.circle-container');
+
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.opacity = Math.random() * 0.9; // Random opacity between 0.2 and 1
+        container.appendChild(star);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createStars(100);
+    });
+  </script>
+  <div class="circle-container">
+    <div class="saturn">
+      <div class="ring"></div>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <h2 class="text-green-400">Certifications</h2>
+    <div class="content-box" ">
+      <a href="https://nptel.ac.in/noc/E_Certificate/NPTEL22CS26S33490801NPTEL2201086232" target="_blank" class="role">Programming, Data Structures and Algorithms using Python</a>
+      <div class="company">NPTEL</div>
+      <div class="time">Issued Apr 2022</div>
+      <ul class="points">
+        <li>Skills: Python, Data Structures and Algorithms (DSA)</li>
+        <li>Credential ID: NPTEL22CS26S33490801</li>
+      </ul>
+    </div>
+
+    <div class="content-box">
+      <a href="https://www.credly.com/badges/dcafb943-790c-4f3c-8846-bbb501ea6d67/public_url" target="_blank" class="role">CCNAv7: Introduction to Networks</a>
+      <div class="company">Cisco Networking Academy</div>
+      <div class="time">Issued May 2024</div>
+      <ul class="points">
+        <li>Skills: Networking, Cisco Networking</li>
+      </ul>
+    </div>
+    <div class="content-box">
+      <a href="https://www.credly.com/earner/earned/badge/1ac2077a-5ddb-4107-a81e-d63ed3c035da" target="_blank" class="role">CCNAv7: Switching, Routing, and Wireless Essentials</a>
+      <div class="company">Cisco Networking Academy</div>
+      <div class="time">Issued Jun 2024</div>
+      <ul class="points">
+        <li>Skills: Cisco Networking, Networking, Network Switches</li>
+      </ul>
+    </div>
+    <div class="content-box">
+      <a href="https://www.credly.com/badges/1d02d1d3-b6ca-492b-a82c-4f3cf5b32b80/public_url" target="_blank" class="role">CCNAv7: Enterprise Networking, Security, and Automation</a>
+      <div class="company">Cisco Networking Academy</div>
+      <div class="time">Issued Jun 2024</div>
+      <ul class="points">
+        <li>Skills: Virtualization, Wireless Networking, Cisco Networking, Network Security, Wide Area Network (WAN)</li>
+      </ul>
+    </div>
+
+   
+
+    <div class="content-box">
+      <a class="role" href="https://collectors.poap.xyz/scan/0x4a68650af830ed14f254f8c442c57a8d5a798b4b" target="_blank">Chainlink Bootcamp</a>
+      <div class="company">Chainlink Labs</div>
+      <div class="time">Issued Jun 2024</div>
+      <ul class="points">
+        <li>Skills:Solidity, Chainlink</li>
+        
+        
+      </ul>
+    </div>
+    <div class="content-box">
+      <a href="https://www.credly.com/badges/1b561e68-0124-42b5-b62a-7f28689d494b/public_url" target="_blank" class="role">Introduction to Cybersecurity</a>
+      <div class="company">Cisco</div>
+      <div class="time">Issued Jun 2024</div>
+      <ul class="points">
+        <li>Skills: Threat & Vulnerability Management, Privacy and Data Confidentiality</li>
+      </ul>
+    </div>
+
+    <div class="content-box">
+      <a href="https://www.credly.com/badges/8d877385-142a-4932-b3fa-1874550621c5/public_url" target="_blank" class="role">Cybersecurity Essentials</a>
+      <div class="company">Cisco</div>
+      <div class="time">Issued Jun 2024</div>
+      <ul class="points"></ul>
+      <li>Skills: Network security, Encryption, Incident response </li>
+    </div>
+
+    
+
+  
+
+    <div class="content-box">
+      <a href="https://www.coursera.org/account/accomplishments/specialization/CPELLN8NX9KN" target="_blank" class="role">Blockchain Specialization</a>
+      <div class="company">University of California, Irvine</div>
+      <div class="time">Issued Apr 2024</div>
+      <ul class="points">
+        <li>Skills: Blockchain, Cryptography</li>
+        <li>Credential ID: CPELLN8NX9KN</li>
+      </ul>
+    </div>
+
+    <div class="content-box">
+      <a class="role">Blockchain Essentials and Development of DApps</a>
+      <div class="company">Chandigarh University</div>
+      <div class="time">Issued Feb 2023</div>
+      <ul class="points">
+        <li>Skills: Blockchain</li>
+        <li>Credential ID: CU/UIE/CSE/VAC/1246</li>
+      </ul>
+    </div>
+
+    <div class="content-box">
+      <a class="role">Create Ethereum and Blockchain Applications Using Solidity</a>
+      <div class="company">Infosys Springboard</div>
+      <div class="time">Issued Feb 2023</div>
+      <ul class="points">
+        <li>Skills: Cryptography, Solidity, Blockchain, Ethereum</li>
+      </ul>
+    </div>
+
+    <div class="content-box">
+      <a href="https://www.coursera.org/account/accomplishments/records/5G9SWZLDXPA2" target="_blank" class="role">Excel Skills for Business: Essentials</a>
+      <div class="company">Macquarie University</div>
+      <div class="time">Issued Apr 2022</div>
+      <ul class="points">
+        <li>Skills: Microsoft Excel, Excel for Business</li>
+        <li>Credential ID: 5G9SWZLDXPA2</li>
+      </ul>
+    </div>
+
+    
+    <footer class="col-span-2 p-6 my-0 mb-0 text-center text-white border border-blue-500 rounded-lg shadow-xl">
+        <a href="index.html">Home</a>
+        <a href="./personal_details.html">Personal Details</a>
+        <a href="./experience.html">Experience</a>
+        <a href="./objective.html">Objective</a>
+        <a href="./projects.html">Projects</a>
+        <a href="./skills.html">Skills</a>
+        <a href="./certifications.html">Certifications</a>
+        <a href="mailto:sivasankarreddyvattigunta@gmail.com">Connect</a>
+      </footer>
+  </div>
+
+  
+</body>
+</html>
